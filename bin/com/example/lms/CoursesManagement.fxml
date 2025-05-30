@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.lms.controller.CourseController"
+      alignment="TOP_CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Course Management" style="-fx-font-size: 20px;"/>
+
+    <TableView fx:id="courseTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="idColumn"        text="Course ID"    prefWidth="100"/>
+            <TableColumn fx:id="nameColumn"      text="Name"         prefWidth="200"/>
+            <TableColumn fx:id="descColumn"      text="Description"  prefWidth="300"/>
+            <TableColumn fx:id="creditsColumn"   text="Credits"      prefWidth="100"/>
+            <TableColumn fx:id="actionColumn"    text="Actions"      prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Add New Course" onAction="#handleAddCourse"/>
+    </HBox>
+
+    <TableView fx:id="teachingTable" prefHeight="300" prefWidth="800">
+        <columns>
+            <TableColumn fx:id="lecturerCol" text="Lecturer"/>
+            <TableColumn fx:id="courseCol" text="Course"/>
+            <TableColumn fx:id="studentCol" text="Student"/>
+            <TableColumn fx:id="moduleCol" text="Lecturer's Module"/>
+            <TableColumn fx:id="studentModuleCol" text="Student's Module"/>
+        </columns>
+    </TableView>
+
+    <stylesheets>
+        <URL value="@common.css"/>
+    </stylesheets>
+
+
+</VBox>

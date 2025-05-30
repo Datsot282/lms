@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.lms.controller.AnnouncementController"
+      alignment="TOP_CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Notices &amp; Announcements" style="-fx-font-size: 20px;"/>
+
+    <TableView fx:id="table" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="idCol"    text="ID"       prefWidth="60"/>
+            <TableColumn fx:id="titleCol" text="Title"    prefWidth="200"/>
+            <TableColumn fx:id="timeCol"  text="Posted At" prefWidth="180"/>
+            <TableColumn fx:id="actionCol" text="Actions" prefWidth="180"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="New Notice" onAction="#onNew"/>
+    </HBox>
+
+    <stylesheets>
+        <URL value="@common.css"/>
+    </stylesheets>
+</VBox>

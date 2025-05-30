@@ -1,0 +1,68 @@
+/* Make VBox fill the window and center content */
+#rootPane {
+    -fx-pref-width: 400px;
+    -fx-pref-height: 350px;
+
+    /* Center in the window */
+    -fx-alignment: center;
+
+    /* Background with a beautiful gradient */
+    -fx-background-color: linear-gradient(to bottom right, #4A90E2, #9013FE);
+
+    /* Rounded corners and shadow for subtle elevation */
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+
+    /* Padding inside the VBox */
+    -fx-padding: 40 30 40 30;
+
+    /* Font for all inside */
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+/* Title label styling */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* GridPane Labels */
+.grid-pane > .label {
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+}
+
+/* TextFields and PasswordFields */
+.text-field, .password-field {
+    -fx-pref-width: 250px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 6 8 6 8;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+}
+
+/* Button styling */
+.login-button {
+    -fx-background-color: #FF6F61;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 8 20 8 20;
+    -fx-effect: dropshadow(gaussian, rgba(255,111,97,0.7), 5, 0.5, 0, 1);
+}
+
+.login-button:hover {
+    -fx-background-color: #E94E3D;
+}
+
+/* Center the HBox button */
+.hbox {
+    -fx-alignment: center;
+}

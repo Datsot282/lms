@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.lms.controller.StatisticsController">
+    <VBox spacing="10" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <!-- Filters -->
+        <HBox spacing="10">
+            <ComboBox fx:id="courseFilter" promptText="Course"/>
+            <ComboBox fx:id="yearFilter" promptText="Year"/>
+            <ComboBox fx:id="semesterFilter" promptText="Semester"/>
+            <Button text="Apply Filters" onAction="#applyFilters"/>
+        </HBox>
+
+        <!-- Student Progress Table -->
+        <TableView fx:id="progressTable" prefHeight="250">
+            <columns>
+                <TableColumn fx:id="studentCol" text="Student"/>
+                <TableColumn fx:id="courseCol" text="Course"/>
+                <TableColumn fx:id="yearCol" text="Year"/>
+                <TableColumn fx:id="semesterCol" text="Semester"/>
+                <TableColumn fx:id="gradeCol" text="Avg Grade"/>
+            </columns>
+        </TableView>
+
+        <!-- Class Chat Section -->
+        <Label text="Class Chat" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+
+        <ListView fx:id="chatListView" prefHeight="200"/>
+        <HBox spacing="10">
+            <ComboBox fx:id="recipientDropdown" promptText="To (Optional)" prefWidth="150"/>
+            <TextField fx:id="chatInput" promptText="Type your message here..." HBox.hgrow="ALWAYS"/>
+            <Button text="Send" onAction="#sendMessage"/>
+        </HBox>
+        <stylesheets>
+            <URL value="@common.css"/>
+        </stylesheets>
+
+    </VBox>
+</AnchorPane>

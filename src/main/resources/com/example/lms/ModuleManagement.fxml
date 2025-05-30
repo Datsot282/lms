@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.lms.controller.ModuleController"
+      alignment="TOP_CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Module Management" style="-fx-font-size: 20px;"/>
+
+    <TableView fx:id="moduleTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="idColumn"         text="ID"         prefWidth="60"/>
+            <TableColumn fx:id="nameColumn"       text="Module"     prefWidth="200"/>
+            <TableColumn fx:id="courseColumn"     text="Course"     prefWidth="200"/>
+            <TableColumn fx:id="yearColumn"       text="Year"       prefWidth="100"/>
+            <TableColumn fx:id="semesterColumn"   text="Semester"   prefWidth="100"/>
+            <TableColumn fx:id="actionColumn"     text="Actions"    prefWidth="180"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Add New Module" onAction="#handleAddModule"/>
+    </HBox>
+    <stylesheets>
+        <URL value="@common.css"/>
+    </stylesheets>
+</VBox>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox spacing="15" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.lms.controller.LoginController"
+      id="rootPane" alignment="CENTER">
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <Label text="Login Page" styleClass="title-label" />
+
+    <GridPane hgap="10" vgap="15" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="100" />
+            <ColumnConstraints halignment="LEFT" minWidth="200" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="40" />
+            <RowConstraints minHeight="40" />
+        </rowConstraints>
+
+        <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button onAction="#handleLogin" prefHeight="30" prefWidth="100" text="Login" styleClass="login-button" />
+    </HBox>
+
+    <stylesheets>
+        <URL value="@login.css"/>
+    </stylesheets>
+</VBox>

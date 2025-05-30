@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.lms.controller.AssignmentController" spacing="10">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+    <Label text="Assignments / Work" style="-fx-font-size: 20px;" />
+
+    <TableView fx:id="assignmentTable" prefHeight="250">
+        <columns>
+            <TableColumn fx:id="titleCol" text="Title" prefWidth="150"/>
+            <TableColumn fx:id="descCol" text="Description" prefWidth="200"/>
+            <TableColumn fx:id="deadlineCol" text="Deadline" prefWidth="150"/>
+            <TableColumn fx:id="uploadedCol" text="Uploaded On" prefWidth="150"/>
+            <TableColumn fx:id="gradeCol" text="Grade" prefWidth="100"/>
+            <TableColumn fx:id="actionCol" text="Actions" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button fx:id="uploadBtn" text="Upload Assignment" onAction="#handleUploadAssignment"/>
+        <Button fx:id="submit1Btn" text="Submit Work" onAction="#handleSubmitWork"/>
+        <Button fx:id="gradeBtn" text="Grade Submission" onAction="#handleGradeSubmission"/>
+    </HBox>
+
+    <Label text="Submissions" style="-fx-font-size: 18px;"/>
+
+    <TableView fx:id="submissionTable" prefHeight="250">
+        <columns>
+            <TableColumn fx:id="studentCol" text="Student" prefWidth="150"/>
+            <TableColumn fx:id="fileCol" text="File Path" prefWidth="200"/>
+            <TableColumn fx:id="submittedCol" text="Submitted At" prefWidth="150"/>
+            <TableColumn fx:id="gradeValCol" text="Grade" prefWidth="100"/>
+        </columns>
+    </TableView>
+    <stylesheets>
+        <URL value="@common.css"/>
+    </stylesheets>
+</VBox>

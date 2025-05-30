@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.lms.controller.Dashboard"
+            prefWidth="1024" prefHeight="768"
+            stylesheets="@dashboard.css" >
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
+            <VBox prefWidth="1024" spacing="10" alignment="TOP_CENTER">
+                <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE"
+                         prefWidth="1000" prefHeight="700">
+                    <Tab fx:id="statisticsTab" text="Dashboard" />
+                    <Tab fx:id="userManagementTab" text="User Management" />
+                    <Tab fx:id="coursesManagementTab" text="Courses Management" />
+                    <Tab fx:id="moduleManagementTab" text="Module Management" />
+                    <Tab fx:id="schoolCalendarTab" text="School Calendar" />
+                    <Tab fx:id="announcementsTab" text="Notices &amp; Announcements" />
+                    <Tab fx:id="materialsUploadTab" text="Materials Upload" />
+                    <Tab fx:id="resultsGradesTab" text="Results &amp; Grades" />
+                    <Tab fx:id="assignmentsTab" text="Assignments &amp; Homework" />
+                    <Tab fx:id="quizTab" text="Quiz" />
+                    <Tab fx:id="transcriptTab" text="Transcript" />
+                    <Tab fx:id="logoutTab" text="Logout" />
+                </TabPane>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

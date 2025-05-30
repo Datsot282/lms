@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+<?import javafx.collections.ObservableList?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+
+<?import java.net.URL?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.lms.controller.QuizController" spacing="10">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <!-- Student Name Field (required by controller) -->
+    <!--<TextField fx:id="studentNameField" promptText="Enter Student Name" />-->
+    <ComboBox fx:id="studentComboBox" promptText="Select Student" />
+
+    <!-- Assignment ID and Time Limit -->
+    <ComboBox fx:id="assignmentComboBox" promptText="Select Assignment"  />
+    <!--<TextField fx:id="timeLimitField" promptText="Enter Time Limit" />-->
+
+    <HBox spacing="10">
+        <!--<Button fx:id="generateQuizButton" text="Generate Quiz" onAction="#handleGenerateQuiz" />-->
+        <Button fx:id="addAssignmentButton" text="Add Assignment" onAction="#handleAddAssignment" />
+    </HBox>
+
+    <!-- Form for Adding a New Question -->
+    <TextField fx:id="questionField" promptText="Enter Question" />
+    <TextField fx:id="optionAField" promptText="Option A" />
+    <TextField fx:id="optionBField" promptText="Option B" />
+    <TextField fx:id="optionCField" promptText="Option C" />
+    <TextField fx:id="optionDField" promptText="Option D" />
+
+    <!-- Dropdown for the correct option -->
+    <ComboBox fx:id="correctOptionCombo">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="A"/>
+                <String fx:value="B"/>
+                <String fx:value="C"/>
+                <String fx:value="D"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <!-- Button to add question to database -->
+    <Button fx:id="addQuestionButton" text="Add Question" onAction="#handleAddQuestionToAssignment" />
+
+    <!-- Table to Display Questions -->
+    <TableView fx:id="questionTable">
+        <columns>
+            <TableColumn fx:id="questionCol" text="Question" />
+            <TableColumn fx:id="optionACol" text="Option A" />
+            <TableColumn fx:id="optionBCol" text="Option B" />
+            <TableColumn fx:id="optionCCol" text="Option C" />
+            <TableColumn fx:id="optionDCol" text="Option D" />
+            <TableColumn fx:id="answerCol" text="Correct Answer" />
+            <TableColumn fx:id="studentAnswerCol" text="Your Answer" />
+            <TableColumn fx:id="actionColumn"    text="Actions"  prefWidth="200"/>
+        </columns>
+    </TableView>
+    <stylesheets>
+        <URL value="@common.css"/>
+    </stylesheets>
+</VBox>
