@@ -21,7 +21,7 @@
             <TableColumn fx:id="deadlineCol" text="Deadline" prefWidth="150"/>
             <TableColumn fx:id="uploadedCol" text="Uploaded On" prefWidth="150"/>
             <TableColumn fx:id="gradeCol" text="Grade" prefWidth="100"/>
-            <TableColumn fx:id="actionCol" text="Actions" prefWidth="200"/>
+            <TableColumn fx:id="actionCol" text="Actions" prefWidth="250"/>
         </columns>
     </TableView>
 

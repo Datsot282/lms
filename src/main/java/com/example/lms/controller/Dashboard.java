@@ -3,6 +3,7 @@ package com.example.lms.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import java.io.IOException;
@@ -163,7 +164,13 @@ public class Dashboard {
             e.printStackTrace();
         }
     }
-
+    private void setCustomTabLabel(Tab tab, String text) {
+        Label label = new Label(text);
+        label.setWrapText(true);
+        label.setMaxWidth(150);
+        label.setStyle("-fx-text-alignment: center; -fx-alignment: center;");
+        tab.setGraphic(label);
+    }
     private void logout() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/lms/login_register.fxml"));

@@ -25,7 +25,7 @@
             <TableColumn fx:id="nameColumn"      text="Name"         prefWidth="200"/>
             <TableColumn fx:id="descColumn"      text="Description"  prefWidth="300"/>
             <TableColumn fx:id="creditsColumn"   text="Credits"      prefWidth="100"/>
-            <TableColumn fx:id="actionColumn"    text="Actions"      prefWidth="200"/>
+            <TableColumn fx:id="actionColumn"    text="Actions"      prefWidth="800"/>
         </columns>
     </TableView>
 
@@ -40,6 +40,7 @@
             <TableColumn fx:id="studentCol" text="Student"/>
             <TableColumn fx:id="moduleCol" text="Lecturer's Module"/>
             <TableColumn fx:id="studentModuleCol" text="Student's Module"/>
+
         </columns>
     </TableView>
 

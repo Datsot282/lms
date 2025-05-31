@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <VBox spacing="10"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -31,4 +32,7 @@
     <HBox spacing="10">
         <Button text="Add Event" onAction="#handleAddEvent"/>
     </HBox>
+    <stylesheets>
+        <URL value="@common.css"/>
+    </stylesheets>
 </VBox>

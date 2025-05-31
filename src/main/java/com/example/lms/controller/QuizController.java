@@ -206,6 +206,10 @@ public class QuizController {
                         return;
                     }
 
+                    // Auto-grade logic
+                    String correctAnswer = q.getCorrectOption();
+                    int grade = selectedAnswer.equalsIgnoreCase(correctAnswer) ? 2 : 0;
+
                     try (Connection conn = DBConnection.getConnection()) {
                         PreparedStatement stmt = conn.prepareStatement(
                                 "INSERT INTO users.submissions (assignment_id, student_name, student_id, question_id, answer, grade) VALUES (?, ?, ?, ?, ?, ?)"
@@ -215,15 +219,29 @@ public class QuizController {
                         stmt.setInt(3, studentId);
                         stmt.setInt(4, q.getId());
                         stmt.setString(5, selectedAnswer);
-                        stmt.setString(6, ""); // Grade will be updated later
+                        stmt.setString(6, String.valueOf(grade));
                         stmt.executeUpdate();
+                        stmt.close();
 
-                        showAlert(Alert.AlertType.INFORMATION, "Answer submitted for: " + q.getQuestionText());
+                        // Log details
+                        System.out.println("===== Submission Submitted =====");
+                        System.out.println("Student Name   : " + studentName);
+                        System.out.println("Student ID     : " + studentId);
+                        System.out.println("Assignment     : " + selectedTitle + " (ID: " + assignmentId + ")");
+                        System.out.println("Question ID    : " + q.getId());
+                        System.out.println("Question Text  : " + q.getQuestionText());
+                        System.out.println("Selected Answer: " + selectedAnswer);
+                        System.out.println("Correct Answer : " + correctAnswer);
+                        System.out.println("Assigned Grade : " + grade);
+                        System.out.println("================================");
+
+                        showAlert(Alert.AlertType.INFORMATION, "Answer submitted and graded for: " + q.getQuestionText());
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                         showAlert(Alert.AlertType.ERROR, "Submission failed for: " + q.getQuestionText());
                     }
                 });
+
 
                 // Instructor actions
                 editBtn.setOnAction(e -> {
@@ -850,12 +868,30 @@ public class QuizController {
 
             for (Question q : questionList) {
                 int questionId = q.getId();
-                String answer = studentAnswers.get(questionId);
+                String studentAnswer = q.getSelectedOption();
 
-                if (answer == null || answer.isEmpty()) {
+                if (studentAnswer == null || studentAnswer.isEmpty()) {
                     allAnswered = false;
-                    continue; // skip unanswered question
+                    continue;
                 }
+
+                String correctAnswer = q.getCorrectOption();
+
+                int gradeForQuestion = 0;
+                if (studentAnswer.equalsIgnoreCase(correctAnswer)) {
+                    gradeForQuestion = 2;
+                }
+
+                // 🔍 Log everything before inserting
+                System.out.println("Logging Submission:");
+                System.out.println("Assignment ID: " + assignmentId);
+                System.out.println("Student Name: " + studentName);
+                System.out.println("Student ID: " + studentId);
+                System.out.println("Question ID: " + questionId);
+                System.out.println("Student Answer: " + studentAnswer);
+                System.out.println("Correct Answer: " + correctAnswer);
+                System.out.println("Grade: " + gradeForQuestion);
+                System.out.println("------------------------------");
 
                 PreparedStatement stmt = conn.prepareStatement(
                         "INSERT INTO users.submissions (assignment_id, student_name, student_id, question_id, answer, grade) VALUES (?, ?, ?, ?, ?, ?)"
@@ -864,9 +900,10 @@ public class QuizController {
                 stmt.setString(2, studentName);
                 stmt.setInt(3, studentId);
                 stmt.setInt(4, questionId);
-                stmt.setString(5, answer);
-                stmt.setString(6, ""); // Grade will be calculated later
+                stmt.setString(5, studentAnswer);
+                stmt.setString(6, String.valueOf(gradeForQuestion)); // 👈 this is where the grade goes
                 stmt.executeUpdate();
+                stmt.close();
             }
 
             if (allAnswered) {

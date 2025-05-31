@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.stage.Window;
 
 
 import java.awt.*;
@@ -32,7 +33,7 @@ public class MaterialController {
     @FXML private TableColumn<Material, Void> actionCol;
 
     private final ObservableList<Material> data = FXCollections.observableArrayList();
-    private final String uploadDir = "C:/Users/Skutush/IdeaProjects/lms/lms_uploads";
+    private final String uploadDir = "C:/Users/Administrator/Downloads/@SCHOOL/DBITY2S2/OOP2/OOP_GROUP_ASSIGNMENT/lms";
 
     @FXML
     public void initialize() {
@@ -135,7 +136,8 @@ public class MaterialController {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
-        grid.setHgap(10); grid.setVgap(10);
+        grid.setHgap(10);
+        grid.setVgap(10);
 
         TextField titleF = new TextField();
         TextArea descA = new TextArea();
@@ -143,32 +145,60 @@ public class MaterialController {
         Button chooseBtn = new Button("Choose File");
 
         final File[] selectedFile = {null};
+
         chooseBtn.setOnAction(e -> {
             FileChooser fc = new FileChooser();
-            selectedFile[0] = fc.showOpenDialog(new Stage());
+            Window window = dialog.getDialogPane().getScene().getWindow(); // use correct owner window
+            selectedFile[0] = fc.showOpenDialog(window);
             if (selectedFile[0] != null) {
                 fileLbl.setText(selectedFile[0].getName());
             }
         });
 
-        grid.add(new Label("Title:"), 0, 0); grid.add(titleF, 1, 0);
-        grid.add(new Label("Description:"), 0, 1); grid.add(descA, 1, 1);
-        grid.add(new Label("File:"), 0, 2); grid.add(fileLbl, 1, 2); grid.add(chooseBtn, 2, 2);
+        grid.add(new Label("Title:"), 0, 0);
+        grid.add(titleF, 1, 0);
+        grid.add(new Label("Description:"), 0, 1);
+        grid.add(descA, 1, 1);
+        grid.add(new Label("File:"), 0, 2);
+        grid.add(fileLbl, 1, 2);
+        grid.add(chooseBtn, 2, 2);
 
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(button -> {
             if (button == ButtonType.OK && selectedFile[0] != null) {
                 try {
-                    String destPath = uploadDir + System.currentTimeMillis() + "_" + selectedFile[0].getName();
-                    Files.copy(selectedFile[0].toPath(), Paths.get(destPath));
-                    String type = Files.probeContentType(Paths.get(destPath));
+                    if (!selectedFile[0].exists()) {
+                        showAlert("File Error", "The selected file no longer exists.");
+                        return null;
+                    }
 
+                    // Ensure the upload directory exists
+                    Path uploadPath = Paths.get(uploadDir);
+                    if (!Files.exists(uploadPath)) {
+                        Files.createDirectories(uploadPath);
+                    }
+
+                    String destPath = uploadDir + System.currentTimeMillis() + "_" + selectedFile[0].getName();
+                    Path destination = Paths.get(destPath);
+
+                    // Copy the file
+                    Files.copy(selectedFile[0].toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
+
+                    // Get MIME type
+                    String type = Files.probeContentType(destination);
+
+                    // Create Material object
                     Material m = new Material(0, titleF.getText(), descA.getText(), destPath, type, LocalDateTime.now());
+
+                    // Save to database
                     saveMaterial(m);
+
                     return m;
+
                 } catch (IOException | SQLException ex) {
                     ex.printStackTrace();
+                    showAlert("Upload Error", "An error occurred while uploading the file:\n" + ex.getMessage());
                 }
             }
             return null;
@@ -179,6 +209,14 @@ public class MaterialController {
             table.refresh();
         });
     }
+
+    private void showAlert(String title, String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
 
     private void saveMaterial(Material m) throws SQLException {
         String sql = "INSERT INTO users.material(title, description, file_path, file_type, uploaded_at) VALUES(?,?,?,?,NOW())";

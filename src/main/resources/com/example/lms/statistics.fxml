@@ -18,7 +18,9 @@
             <ComboBox fx:id="yearFilter" promptText="Year"/>
             <ComboBox fx:id="semesterFilter" promptText="Semester"/>
             <Button text="Apply Filters" onAction="#applyFilters"/>
+            <ListView fx:id="notificationsListView" prefHeight="200" prefWidth="300" />
         </HBox>
+
 
         <!-- Student Progress Table -->
         <TableView fx:id="progressTable" prefHeight="250">
